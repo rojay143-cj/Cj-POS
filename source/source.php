@@ -1,7 +1,7 @@
 <?php 
-    $getItem = "SELECT * FROM item";
-    $getItem = mysqli_query($conn, $getItem);
-    while($rowItem = $getItem -> fetch_assoc()){
-        $itemData[] = $rowItem;
+    $getSup= "SELECT * FROM supplier";
+    $getSup = mysqli_query($conn, $getSup);
+    while($rowSup = $getSup -> fetch_assoc()){
+        $supData[] = $rowSup;
     }
 ?>
