@@ -69,6 +69,12 @@
             font-size: 1.1em;
             padding: 10px;
             width: 290px;
+        }#supCat{
+            width: 290px;
+            height: 30px;
+            margin-bottom: 10px;
+            text-align:center;
+            font-size: 1.1em;
         }
     </style>
 </head>
@@ -82,28 +88,30 @@
             </div>
         </div>
         <div class="main">
-            <h2 style="text-align: center;">List of Supplier</h2>
+            <h2 style="text-align: center;">List of Item</h2>
             <table id="example" class="display" style="max-width:100%;text-align:center">
                 <thead>
                     <tr>
-                        <th>Supplier name</th>
-                        <th>Contact name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
+                        <th>item id</th>
+                        <th>item name</th>
+                        <th>unit price</th>
+                        <th>quantity</th>
+                        <th>barcode</th>
+                        <th>supplier</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
-                        foreach($supData as $rowSup){
+                        foreach($dataItem as $rowItem){
                     ?>
                     <tr>
-                        <td><?php echo $rowSup['supplier_name'] ?></td>
-                        <td><?php echo $rowSup['contact_name'] ?></td>
-                        <td><?php echo $rowSup['contact_email'] ?></td>
-                        <td><?php echo $rowSup['contact_phone'] ?></td>
-                        <td><?php echo $rowSup['address'] ?></td>
+                        <td>#<?php echo $rowItem['item_id'] ?></td>
+                        <td><?php echo $rowItem['item_name'] ?></td>
+                        <td><?php echo $rowItem['unit_price'] ?></td>
+                        <td><?php echo $rowItem['quantity'] ?></td>
+                        <td><?php echo $rowItem['barcode'] ?></td>
+                        <td><?php echo $rowItem['supplier_name'] ?></td>
                         <td><button style="padding: 10px;cursor:pointer; width: 100px">Edit</button></td>
                     </tr>
                     <?php }?>
@@ -111,17 +119,25 @@
             </table>
             <div class="addItem">
                 <form action="" method="POST">
-                <h2>Register New Supplier</h2>
-                    <input type="text" name="txtSupname" placeholder="Suppier name">
-                    <input type="text" name="txtSupcontactname" placeholder="Contact name">
-                    <input type="text" name="txtSupemail" placeholder="Email">
-                    <input type="text" name="txtSupphone" placeholder="Phone number">
-                    <textarea name="txtSupaddress" placeholder="Supplier Address" style="width: 290px;height: 100px"></textarea>
-                    <div class="div_register_sup"><button name="reg_sup">Register Supplier</button></div>
+                <h2>Add New Item</h2>
+                    <input type="text" name="txtItemname" placeholder="Item name">
+                    <input type="text" name="txtItemprice" placeholder="Unit Price">
+                    <input type="text" name="txtItemquantity" placeholder="Quantity">
+                    <select name="supCat" id="supCat">
+                        <option value="">Select Supplier</option>
+                        <?php 
+                            foreach($supData as $rowSup){
+                        ?>
+                        <option value="<?php echo $rowSup['supplier_id'] ?>"><?php echo $rowSup['supplier_name'] ?></option>
+                        <?php } ?>
+                    </select>
+                    <textarea name="txtItemdes" placeholder="Add Item Description(Optional)" style="width: 290px;height: 100px"></textarea>
+                    <div class="div_register_sup"><button name="add_item">Register Supplier</button></div>
                 </form>
             </div>
         </div>
         <div class="footer">footer</div>
+    </div>
 
     <script>
        $('#example').DataTable();
