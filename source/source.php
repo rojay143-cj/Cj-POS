@@ -1,13 +1,17 @@
 <?php 
     require '../connection/connection.php';
     echo '<script src="../api/datatables.js"></script>
-    <link rel="stylesheet" href="../api/datatables.css">';
+    <link rel="stylesheet" href="../api/datatables.css">
+    <script src="../api/bootstrap.js"></script>
+    <link rel="stylesheet" href="../api/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/style.css">';
 ?>
 
 
 
 <?php 
     /*  CODE FOR ITEM */
+    $dataItem = [];
     $getItem = "SELECT * FROM item JOIN supplier ON item.supplier_id = supplier.supplier_id";
     $getItem = mysqli_query($conn, $getItem);
     while($rowItem = $getItem -> fetch_assoc()){
@@ -35,12 +39,22 @@
             $sqlinsertItem = "INSERT INTO item (item_name, unit_price, quantity, reorder_point, barcode, description, supplier_id) 
             VALUES ('$txtItemname','$txtItemprice','$txtItemquantity', '$reorder','$barcode', '$txtItemdes','$supCat')";
             $sqlinsertItem = mysqli_query($conn, $sqlinsertItem);
+
+            echo "
+                <script>
+                    $(document).ready(function(){
+                        alert('Item added successfully');
+                        window.location.href = 'item.php';
+                    })
+                </script>
+            ";
         }
     }
 ?>
 
 <?php
 /* CODE FOR SUPPLIER */
+    $supData = [];
     $getSup= "SELECT * FROM supplier";
     $getSup = mysqli_query($conn, $getSup);
     while($rowSup = $getSup -> fetch_assoc()){
@@ -61,6 +75,7 @@
                 <script>
                     $(document).ready(function(){
                         alert('Successfully Registered');
+                        window.location.href='supplier.php';
                     })
                 </script>
             ";

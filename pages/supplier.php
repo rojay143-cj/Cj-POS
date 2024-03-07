@@ -8,68 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StockMaster</title>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        .side-nav{ grid-area: side-nav;}
-        .main{ grid-area: main;}
-        .footer{ grid-area: footer;}
-        .stock-container{
-            display: grid;
-            grid-template-areas: 
-            '. . . . . . . . .'
-            'side-nav main main main main main main main main'
-            'footer footer footer footer footer footer footer footer footer';
-        }
-        .side-nav{
-            height: 100vh;
-            width: auto;
-            background-color: #87C4FF;
-        }.wrapper a{
-            display: block;
-            padding: 10px;
-            background-color: #E0F4FF;
-            color: #39A7FF;
-            margin: 10px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: lighter;
-        }.wrapper a:hover{
-            background-color: #FFEED9;
-            box-shadow: 1px 1px 1px 1px #E0F4FF;
-        }#example_wrapper{
-            background-color: #E0F4FF;
-            width: 90%;
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 15px;
-            border: 1px solid #39A7FF;
-            /*box-shadow: 5px 5px #E0F4FF;*/
-        }.addItem{
-            width: 90%;
-            height: auto;
-            margin: 0 auto;
-            padding: 15px 0;
-            font-size: 1.1em;
-        }.addItem form{
-            border: #87C4FF 1px solid;
-            background-color: #E0F4FF;
-            width: 312px;
-            padding: 10px;
-        }.addItem form > input, #supplier{
-            display: block;
-            margin: 10px 0;
-            width: 290px;
-            height: 30px;
-            text-align: center;
-            font-size: 1.1em;
-        }.div_register_sup button{
-            font-size: 1.1em;
-            padding: 10px;
-            width: 290px;
-        }
+        
     </style>
 </head>
 <body>
@@ -77,6 +16,7 @@
         <div class="side-nav">
             <h1 style="text-align:center;background-color: #39A7FF;color: #FFEED9;margin: 10px;padding: 20px 0">STOCKMASTER</h1>
             <div class="wrapper">
+                <div><a href="order.php">ORDER</a></div>
                 <div><a href="item.php">ITEM</a></div>
                 <div><a href="supplier.php">SUPPLIER</a></div>
             </div>
