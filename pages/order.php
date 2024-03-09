@@ -1,15 +1,6 @@
 <?php 
     require '../source/source.php';
 ?>
-<?php 
-    if(!isset($_SESSION['cart_item'])){
-        $_SESSION['cart_item'] = array();
-    }
-    if(isset($_POST['get_item_id'])){
-        $id = $_POST['get_item_id'];
-        echo $id;
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +66,7 @@
     </div>
     <script>
         $(document).ready(function(){
-            item_array = [];
+            var item_array = [];
             $('.btn_buy').on('click',function(){
                 var card = $(this).closest('.card-body');
                 let item_name = card.find('.item_name').text();
@@ -108,23 +99,19 @@
                 }
             }
             $('#btn_order_item').on('click', function(){
-                
+                $.ajax({
+                    type: 'POST',
+                    url: '../source/test.php',
+                    data: {item_array: JSON.stringify(item_array)},
+                    success:function(response){
+                        alert('Item placed successfully😊');
+                    },
+                    error:function(xhr, status, error){
+                        alert('ERROR!');
+                    }
+                });
             });
         });
     </script>
-    <table>
-        <thead>
-            <tr>
-                <th>Item name</th>
-                <th>Item price</th>
-                <th>Item quanitty</th>
-            </tr>
-        </thead>
-        <tbody id="get_selected_items">
-            <tr>
-                
-            </tr>
-        </tbody>
-    </table>
 </body>
 </html>

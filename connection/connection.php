@@ -8,11 +8,9 @@
         $conn = mysqli_connect($server,$username,$password,$dbName);
         if(!$conn){
             echo "UNABLE TO CONNECT TO YOUR DATABASE!";
-        }else{
-            echo "";
         }
 
-    } catch (mysqli_sql_exception) {
-        echo "ERROR";
+    } catch (mysqli_sql_exception $e) {
+        echo "ERROR: " . $e->getMessage();
     }
 ?>
