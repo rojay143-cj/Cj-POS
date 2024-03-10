@@ -92,6 +92,7 @@
 ?>
 
 <?php
+/* CODE FOR Add to Cart & Placing Orders */
 if (isset($_POST['item_array'])) {
     $item_array = json_decode($_POST['item_array'], true);
 

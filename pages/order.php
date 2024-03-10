@@ -35,7 +35,7 @@
                         <div class="card-body card col-sm-12 w-100 h-100">
                             <img src="../assets/image/hammer.webp" alt="Hammer" class="img-thumbnail">
                             <h5 class="card-title item_name"><?php echo $rowItem['item_name']; ?></h5>
-                            <span class="card-text item_price"><?php echo $rowItem['unit_price']; ?></span>
+                            <span class="card-text item_price">₱<?php echo $rowItem['unit_price']; ?></span>
                             <div class="form-group">
                                 <input type="number" min="1" value="1" placeholder="quantity" class="form-control item_quantity">
                                 <input type="hidden" class="item_id" value="<?php echo $rowItem['item_id']; ?>">
@@ -63,9 +63,6 @@
             </div>
         </div>
         <div class="footer">footer</div>
-        <form action="" method="post">
-            <input type="submit" value="Submit" name="btn_test">
-        </form>
     </div>
     <script>
         $(document).ready(function(){
@@ -104,7 +101,7 @@
             $('#btn_order_item').on('click', function(){
                 $.ajax({
                     type: 'POST',
-                    url: '../source/test.php',
+                    url: '../source/source.php',
                     data: {item_array:JSON.stringify(item_array)},
                     success: function(){
                         alert('Item placed successfully');
