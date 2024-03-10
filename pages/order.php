@@ -63,6 +63,9 @@
             </div>
         </div>
         <div class="footer">footer</div>
+        <form action="" method="post">
+            <input type="submit" value="Submit" name="btn_test">
+        </form>
     </div>
     <script>
         $(document).ready(function(){
@@ -102,12 +105,12 @@
                 $.ajax({
                     type: 'POST',
                     url: '../source/test.php',
-                    data: {item_array: JSON.stringify(item_array)},
-                    success:function(response){
-                        alert('Item placed successfully😊');
+                    data: {item_array:JSON.stringify(item_array)},
+                    success: function(){
+                        alert('Item placed successfully');
                     },
-                    error:function(xhr, status, error){
-                        alert('ERROR!');
+                    error:function(){
+                        alert('Error!');
                     }
                 });
             });
@@ -115,3 +118,12 @@
     </script>
 </body>
 </html>
+<?php 
+        if(isset($_POST['btn_test'])){
+            $item_array = json_decode($_POST['item_array'],true);
+            foreach($item_array as $items){
+                echo $items;
+            }
+        }
+    
+?>
