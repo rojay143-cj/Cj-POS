@@ -1,5 +1,5 @@
 <?php 
-    require '../source/source.php';
+    require '../source/code.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,8 +55,7 @@
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <button id="btn_order_item">Buy Item</button>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="btn btn-primary" id="btn_modal">
                                         Proceed
                                     </button>
                                 </div>
@@ -72,7 +71,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -85,69 +84,57 @@
                                 <th>Item Subtotal</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                
-                            </tr>
+                        <tbody id="order_record">
+                            
                         </tbody>
                     </table>
+                    <div class="col-sm-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Customer name</span>
+                            </div>
+                            <input type="text" name="cusName" id="cusName" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Cash amount</span>
+                            </div>
+                            <input type="text" name="tend_amount" id="tend_amount" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Phone / Mobile</span>
+                            </div>
+                            <input type="text" name="cusMob" id="cusMob" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Payment Type</span>
+                            </div>
+                            <select class="form-control" name="payType" id="payType">
+                                <option value="">Cash</option>
+                                <option value="">Bank</option>
+                                <option value="">GCash</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 mt-3">
+                        <div class="form-group m-auto">
+                            <span id="total_amount" class="form-control"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="btn_order_item">Buy Item</button>
                 </div>
                 </div>
             </div>
         </div>
     </div>
+    <span class="total"></span>
     <script>
-        $(document).ready(function(){
-            var item_array = [];
-            $('.btn_buy').on('click',function(){
-                var card = $(this).closest('.card-body');
-                let item_name = card.find('.item_name').text();
-                let item_price = parseInt(card.find('.item_price').val());
-                let item_quantity = parseInt(card.find('.item_quantity').val());
-                let item_id = card.find('.item_id').val();
-                
-                var existingItem = item_array.find(item => item.item_id === item_id);
-                if(existingItem){
-                    existingItem.item_quantity += item_quantity;
-                }else{
-                    item_list = {
-                    'item_name':item_name,
-                    'item_price':item_price,
-                    'item_quantity':item_quantity,
-                    'item_id':item_id
-                };
-                    item_array.push(item_list);
-                };
-                displayItem();
-            });
-            function displayItem(){
-                $('#display_item').empty();
-                for(var i = 0;i < item_array.length;i++){
-                    var items = '<div class="order_items"></div>';
-                    items += '<div class="card-body"><span class=""col-sm-12">' +item_array[i].item_name + ': </span>';
-                    items += '<span id="item_price">₱' +item_array[i].item_price + ' </span>';
-                    items += '<span id="item_quantity">' +item_array[i].item_quantity + 'qty</span></div>';
-                    $('#display_item').append(items);
-                }
-            }
-            $('#btn_order_item').on('click', function(){
-                $.ajax({
-                    type: 'POST',
-                    url: '../source/source.php',
-                    data: {item_array:JSON.stringify(item_array)},
-                    success: function(){
-                        alert('Item placed successfully');
-                    },
-                    error:function(){
-                        alert('Error!');
-                    }
-                });
-            });
-        });
+        
     </script>
 </body>
 </html>

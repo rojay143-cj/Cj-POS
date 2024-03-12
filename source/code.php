@@ -1,10 +1,12 @@
 <?php 
     require '../connection/connection.php';
     echo '<script src="../api/datatables.js"></script>
+    <script src="../JS/stockJS.js"></script>
     <link rel="stylesheet" href="../api/datatables.css">
     <script src="../api/bootstrap.js"></script>
     <link rel="stylesheet" href="../api/bootstrap.css">
-    <link rel="stylesheet" href="../CSS/style.css">';
+    <link rel="stylesheet" href="../CSS/style.css">
+    ';
 ?>
 
 
