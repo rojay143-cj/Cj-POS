@@ -16,7 +16,7 @@ $(document).ready(function(){
             'item_name':item_name,
             'item_price':item_price,
             'item_quantity':item_quantity,
-            'item_id':item_id
+            'item_id':item_id,
         };
             item_array.push(item_list);
         };
@@ -48,7 +48,7 @@ $(document).ready(function(){
             $('#order_record').append(row);
         }
         $('#total_amount').html(
-            '<span>Total: ₱' + total_amount + '</span>'
+            total_amount
         );
     }
     $('#btn_modal').on('click', function(){
@@ -57,12 +57,7 @@ $(document).ready(function(){
     });
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     $('#btn_order_item').on('click', function(){
-        let cusName = $('#cusName');
-        let tend_amount = $('#tend_amount');
-        let cusMob = $('#cusMob');
-        let payType = $('#payType :selected');
-        
-        if((cusName.val() != null && cusName.val() != '' ) && (tend_amount.val() != null && tend_amount.val() != '')){
+        if(($('#cusName').val() != null && $('#cusName').val() != '' ) && ($('#tend_amount').val() != null && $('#tend_amount').val() != '')){
             $.ajax({
                 type: 'POST',
                 url: '../source/code.php',
@@ -77,6 +72,39 @@ $(document).ready(function(){
         }else{
             alert('Please Enter fill-up the form!');
         }
+        
     });
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+});
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+var customer_array = [];
+$('#btn_order_item').on('click',function(){
+        let cusName = $('#cusName').val();
+        let tend_amount = $('#tend_amount').val();
+        let cusMob = $('#cusMob').val();
+        let payType = $('#payType :selected').val();
+        let totalAmount = $('#total_amount').text()
+        customer_details = {
+            'customer_name': cusName,
+            'tend_amount': tend_amount,
+            'total_amount':totalAmount,
+            'customer_mobile': cusMob,
+            'pay_type': payType
+        };
+        customer_array.push(customer_details);
+        if(($('#cusName').val() != null && $('#cusName').val() != '' ) && ($('#tend_amount').val() != null && $('#tend_amount').val() != '')){
+            $.ajax({
+                type: 'POST',
+                url: '../source/code.php',
+                data:{customer_array:JSON.stringify(customer_array)},
+                success: function(){
+                    alert("Order placed");
+                },
+                error: function(){
+                    alert('Failed to Send data!');
+                }
+            });
+        }else{
+            alert('Please Enter fill-up the form!');
+        }
 });

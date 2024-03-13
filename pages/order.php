@@ -88,7 +88,7 @@
                             
                         </tbody>
                     </table>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 mt-5">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Customer name</span>
@@ -112,15 +112,15 @@
                                 <span class="input-group-text">Payment Type</span>
                             </div>
                             <select class="form-control" name="payType" id="payType">
-                                <option value="">Cash</option>
-                                <option value="">Bank</option>
-                                <option value="">GCash</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Bank">Bank</option>
+                                <option value="GCash">GCash</option>
                             </select>
                         </div>
                     </div>
                     <div class="input-group mb-3 mt-3">
                         <div class="form-group m-auto">
-                            <span id="total_amount" class="form-control"></span>
+                            <span class="form-control">Total: Php <span id="total_amount"></span></span>
                         </div>
                     </div>
                 </div>
@@ -132,9 +132,12 @@
             </div>
         </div>
     </div>
-    <span class="total"></span>
     <script>
         
+    </script>
+
+    <script>
+       
     </script>
 </body>
 </html>
