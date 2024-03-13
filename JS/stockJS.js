@@ -1,8 +1,38 @@
-    /*
-    $(document).ready(function(){
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+$(document).ready(function(){
     var item_array = [];
+    $('#btn_order_item').on('click',function(){
+            let cusName = $('#cusName').val();
+            let tend_amount = $('#tend_amount').val();
+            let cusMob = $('#cusMob').val();
+            let payType = $('#payType :selected').val();
+            let totalAmount = $('#total_amount').text()
+            item_list = {
+                'customer_name': cusName,
+                'tend_amount': tend_amount,
+                'total_amount':totalAmount,
+                'customer_mobile': cusMob,
+                'pay_type': payType
+            };
+            item_array.push(item_list);
+            if(($('#cusName').val() != null && $('#cusName').val() != '' ) && ($('#tend_amount').val() != null && $('#tend_amount').val() != '')){
+                $.ajax({
+                    type: 'POST',
+                    url: '../source/code.php',
+                    data:{item_array:JSON.stringify(item_array)},
+                    success: function(){
+                        item_array = [];
+                        alert("Order placed");
+                    },
+                    error: function(){
+                        alert('Failed to Send data!');
+                    }
+                });
+            }else{
+                alert('Please Enter fill-up the form!');
+            }
+    });
     $('.btn_buy').on('click',function(){
+        $('#display_item').empty();
         var card = $(this).closest('.card-body');
         let item_name = card.find('.item_name').text();
         let item_price = parseInt(card.find('.item_price').val());
@@ -21,10 +51,6 @@
         };
             item_array.push(item_list);
         };
-        displayItem();
-    });
-    function displayItem(){
-        $('#display_item').empty();
         for(var i = 0;i < item_array.length;i++){
             var items = '<div class="order_items"></div>';
             items += '<div class="card-body"><span class=""col-sm-12">' +item_array[i].item_name + ': </span>';
@@ -32,8 +58,7 @@
             items += '<span id="item_quantity">' +item_array[i].item_quantity + 'qty</span></div>';
             $('#display_item').append(items);
         }
-    }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    });
     function modaltable() {
         $('#order_record').empty();
         let total_amount = 0;
@@ -53,64 +78,7 @@
         );
     }
     $('#btn_modal').on('click', function(){
-        modaltable();
         $('#exampleModal').modal('show');
+        modaltable();
     });
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    $('#btn_order_item').on('click', function(){
-        if(($('#cusName').val() != null && $('#cusName').val() != '' ) && ($('#tend_amount').val() != null && $('#tend_amount').val() != '')){
-            $.ajax({
-                type: 'POST',
-                url: '../source/code.php',
-                data: {item_array:JSON.stringify(item_array)},
-                success: function(){
-                    alert('Item placed successfully');
-                },
-                error:function(){
-                    alert('Error!');
-                }
-            });
-        }else{
-            alert('Please Enter fill-up the form!');
-        }
-        
-    });
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-});
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    */
-
-     /*
-        var customer_array = [];
-        $('#btn_order_item').on('click',function(){
-                let cusName = $('#cusName').val();
-                let tend_amount = $('#tend_amount').val();
-                let cusMob = $('#cusMob').val();
-                let payType = $('#payType :selected').val();
-                let totalAmount = $('#total_amount').text()
-                customer_details = {
-                    'customer_name': cusName,
-                    'tend_amount': tend_amount,
-                    'total_amount':totalAmount,
-                    'customer_mobile': cusMob,
-                    'pay_type': payType
-                };
-                customer_array.push(customer_details);
-                if(($('#cusName').val() != null && $('#cusName').val() != '' ) && ($('#tend_amount').val() != null && $('#tend_amount').val() != '')){
-                    $.ajax({
-                        type: 'POST',
-                        url: '../source/code.php',
-                        data:{customer_array:JSON.stringify(customer_array)},
-                        success: function(){
-                            alert("Order placed");
-                        },
-                        error: function(){
-                            alert('Failed to Send data!');
-                        }
-                    });
-                }else{
-                    alert('Please Enter fill-up the form!');
-                }
-        });
-
-        */
+})
