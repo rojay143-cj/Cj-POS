@@ -91,6 +91,24 @@
         }
     }
 ?>
+<?php
+/* CODE FOR Add to Cart & Placing Orders */
+if (isset($_POST['item_array'])) {
+    $item_array = json_decode($_POST['item_array'], true);
+
+    foreach ($item_array as $item) {
+        $customer_name = $item['customer_name'];
+        $customer_mobile = $item['customer_mobile'];
+        $pay_type = $item['pay_type'];
+        $tend_amount = $item['tend_amount'];
+        $total_amount = $item['total_amount'];
+
+        $stmt_order = mysqli_prepare($conn, "INSERT INTO orders (customer_name, customer_phone, payment_type, amount_tendered, total_amount) VALUES (?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt_order, "sssss", $customer_name, $customer_mobile, $pay_type, $tend_amount, $total_amount);
+        mysqli_stmt_execute($stmt_order);
+    }
+}
+?>
 
 <?php
 /* CODE FOR Add to Cart & Placing Orders */
@@ -102,19 +120,17 @@ if (isset($_POST['item_array'])) {
         $item_quantity = $item['item_quantity'];
         $item_price = $item['item_price'];
         $subtotal = $item_quantity * $item_price;
-        $customer_name = $item['customer_name'];
-        $tend_amount = $item['tend_amount'];
-        $total_amount = $item['total_amount'];
-        $customer_mobile = $item['customer_mobile'];
-        $pay_type = $item['pay_type'];
 
-        $insert_to_orderdetails = "INSERT INTO order_details (item_id, item_quantity, item_price, item_subtotal) 
-        VALUES ('$item_id', '$item_quantity', '$item_price','$subtotal')";
-        $result_orderDetails = mysqli_query($conn, $insert_to_orderdetails);
+        $sqlget_orderID = "SELECT * FROM orders";
+        $result_orderID = mysqli_query($conn, $sqlget_orderID);
+        while($rowOrders = $result_orderID -> fetch_array()){
+            $currentId = $rowOrders['order_id'];
+        }
+
+        $stmt_orderDetails = mysqli_prepare($conn, "INSERT INTO order_details (item_id, item_quantity, item_price, item_subtotal, order_id) VALUES (?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt_orderDetails, "ssssi", $item_id, $item_quantity, $item_price, $subtotal, $currentId);
+        mysqli_stmt_execute($stmt_orderDetails);
     }
-    $insert_to_order = "INSERT INTO orders (customer_name, customer_phone, payment_type, amount_tendered, total_amount) 
-    VALUES ('$customer_name', '$customer_mobile', '$pay_type', '$tend_amount', '$total_amount')";
-    $result_order = mysqli_query($conn, $insert_to_order);
 }
-
 ?>
+
