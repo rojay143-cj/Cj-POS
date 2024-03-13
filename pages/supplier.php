@@ -1,5 +1,5 @@
 <?php 
-    require '../source/source.php';
+    require '../source/code.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

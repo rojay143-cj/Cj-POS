@@ -1,7 +1,6 @@
 <?php 
     require '../connection/connection.php';
     echo '<script src="../api/datatables.js"></script>
-    <script src="../JS/stockJS.js"></script>
     <link rel="stylesheet" href="../api/datatables.css">
     <script src="../api/bootstrap.js"></script>
     <link rel="stylesheet" href="../api/bootstrap.css">
@@ -103,25 +102,19 @@ if (isset($_POST['item_array'])) {
         $item_quantity = $item['item_quantity'];
         $item_price = $item['item_price'];
         $subtotal = $item_quantity * $item_price;
+        $customer_name = $item['customer_name'];
+        $tend_amount = $item['tend_amount'];
+        $total_amount = $item['total_amount'];
+        $customer_mobile = $item['customer_mobile'];
+        $pay_type = $item['pay_type'];
 
         $insert_to_orderdetails = "INSERT INTO order_details (item_id, item_quantity, item_price, item_subtotal) 
         VALUES ('$item_id', '$item_quantity', '$item_price','$subtotal')";
         $result_orderDetails = mysqli_query($conn, $insert_to_orderdetails);
     }
-}
-
-if(isset($_POST['customer_array'])){
-    $customer_array = json_decode($_POST['customer_array'],true);
-
-    foreach($customer_array as $details){
-        $customer_name = $details['customer_name'];
-        $tend_amount = $details['tend_amount'];
-        $total_amount = $details['total_amount'];
-        $customer_mobile = $details['customer_mobile'];
-        $pay_type = $details['pay_type'];
-    }
     $insert_to_order = "INSERT INTO orders (customer_name, customer_phone, payment_type, amount_tendered, total_amount) 
     VALUES ('$customer_name', '$customer_mobile', '$pay_type', '$tend_amount', '$total_amount')";
     $result_order = mysqli_query($conn, $insert_to_order);
 }
+
 ?>

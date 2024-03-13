@@ -1,4 +1,5 @@
-$(document).ready(function(){
+    /*
+    $(document).ready(function(){
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     var item_array = [];
     $('.btn_buy').on('click',function(){
@@ -77,34 +78,39 @@ $(document).ready(function(){
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 });
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-var customer_array = [];
-$('#btn_order_item').on('click',function(){
-        let cusName = $('#cusName').val();
-        let tend_amount = $('#tend_amount').val();
-        let cusMob = $('#cusMob').val();
-        let payType = $('#payType :selected').val();
-        let totalAmount = $('#total_amount').text()
-        customer_details = {
-            'customer_name': cusName,
-            'tend_amount': tend_amount,
-            'total_amount':totalAmount,
-            'customer_mobile': cusMob,
-            'pay_type': payType
-        };
-        customer_array.push(customer_details);
-        if(($('#cusName').val() != null && $('#cusName').val() != '' ) && ($('#tend_amount').val() != null && $('#tend_amount').val() != '')){
-            $.ajax({
-                type: 'POST',
-                url: '../source/code.php',
-                data:{customer_array:JSON.stringify(customer_array)},
-                success: function(){
-                    alert("Order placed");
-                },
-                error: function(){
-                    alert('Failed to Send data!');
+    */
+
+     /*
+        var customer_array = [];
+        $('#btn_order_item').on('click',function(){
+                let cusName = $('#cusName').val();
+                let tend_amount = $('#tend_amount').val();
+                let cusMob = $('#cusMob').val();
+                let payType = $('#payType :selected').val();
+                let totalAmount = $('#total_amount').text()
+                customer_details = {
+                    'customer_name': cusName,
+                    'tend_amount': tend_amount,
+                    'total_amount':totalAmount,
+                    'customer_mobile': cusMob,
+                    'pay_type': payType
+                };
+                customer_array.push(customer_details);
+                if(($('#cusName').val() != null && $('#cusName').val() != '' ) && ($('#tend_amount').val() != null && $('#tend_amount').val() != '')){
+                    $.ajax({
+                        type: 'POST',
+                        url: '../source/code.php',
+                        data:{customer_array:JSON.stringify(customer_array)},
+                        success: function(){
+                            alert("Order placed");
+                        },
+                        error: function(){
+                            alert('Failed to Send data!');
+                        }
+                    });
+                }else{
+                    alert('Please Enter fill-up the form!');
                 }
-            });
-        }else{
-            alert('Please Enter fill-up the form!');
-        }
-});
+        });
+
+        */
