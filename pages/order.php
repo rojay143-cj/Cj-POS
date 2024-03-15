@@ -33,7 +33,7 @@
                     <div class="selection col-lg-8 p-2 flex-wrap">
                         <?php foreach($dataItem as $rowItem){ ?>
                         <div class="card-body card col-sm-12 w-100 h-100">
-                            <img src="../assets/image/hammer.webp" alt="Hammer" class="img-thumbnail">
+                            <img src="<?php echo $rowItem['image']; ?>" alt="Hammer" class="img-thumbnail h-50">
                             <h5 class="card-title item_name"><?php echo $rowItem['item_name']; ?></h5>
                             <input type="hidden" class="item_price" value="<?php echo $rowItem['unit_price']; ?>">
                             <span class="card-text">₱<?php echo $rowItem['unit_price']; ?></span>
@@ -127,7 +127,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="btn_order_item">Buy Item</button>
-                    <button class="try">try</button>
                 </div>
                 </div>
             </div>
@@ -188,10 +187,10 @@
                     item_array.push(item_list);
                 };
                 for(var i = 0;i < item_array.length;i++){
-                    var items = '<div class="order_items"></div>';
-                    items += '<div class="card-body"><span class=""col-sm-12">' +item_array[i].item_name + ': </span>';
+                    var items = '<div class="order_items border m-2">';
+                    items += '<span id="item_name">' +item_array[i].item_name + ': </span>';
                     items += '<span id="item_price">₱' +item_array[i].item_price + ' </span>';
-                    items += '<span id="item_quantity">' +item_array[i].item_quantity + 'qty</span></div>';
+                    items += '<button class="btn btn-dark">-</button><span id="item_quantity">' +item_array[i].item_quantity + '</span><button class="btn btn-dark">+</button></div>';
                     $('#display_item').append(items);
                 }
             });

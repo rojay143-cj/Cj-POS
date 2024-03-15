@@ -26,7 +26,7 @@
             <table id="example" class="display" style="max-width:100%;text-align:center">
                 <thead>
                     <tr>
-                        <th>item id</th>
+                        <th width="100">item id</th>
                         <th>item name</th>
                         <th>unit price</th>
                         <th>quantity</th>
@@ -40,7 +40,7 @@
                         foreach($dataItem as $rowItem){
                     ?>
                     <tr>
-                        <td>#<?php echo $rowItem['item_id'] ?></td>
+                        <td><img src="<?php echo $rowItem['image'] ?>" class="img-thumbnail" style="width: 50px; height: 45px">#<?php echo $rowItem['item_id'] ?></td>
                         <td><?php echo $rowItem['item_name'] ?></td>
                         <td><?php echo $rowItem['unit_price'] ?></td>
                         <td><?php echo $rowItem['quantity'] ?></td>
