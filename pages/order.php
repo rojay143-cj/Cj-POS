@@ -166,33 +166,54 @@
                         alert('Please Enter fill-up the form!');
                     }
             });
-            $('.btn_buy').on('click',function(){
+            $('.btn_buy').on('click', function () {
                 $('#display_item').empty();
                 var card = $(this).closest('.card-body');
                 let item_name = card.find('.item_name').text();
                 let item_price = parseInt(card.find('.item_price').val());
                 let item_quantity = parseInt(card.find('.item_quantity').val());
                 let item_id = card.find('.item_id').val();
-                
+
                 var existingItem = item_array.find(item => item.item_id === item_id);
-                if(existingItem){
+                if (existingItem) {
                     existingItem.item_quantity += item_quantity;
-                }else{
+                } else {
                     item_list = {
-                    'item_name':item_name,
-                    'item_price':item_price,
-                    'item_quantity':item_quantity,
-                    'item_id':item_id,
-                };
+                        'item_name': item_name,
+                        'item_price': item_price,
+                        'item_quantity': item_quantity,
+                        'item_id': item_id,
+                    };
                     item_array.push(item_list);
                 };
-                for(var i = 0;i < item_array.length;i++){
-                    var items = '<div class="order_items border m-2">';
-                    items += '<span id="item_name">' +item_array[i].item_name + ': </span>';
-                    items += '<span id="item_price">₱' +item_array[i].item_price + ' </span>';
-                    items += '<button class="btn btn-dark">-</button><span id="item_quantity">' +item_array[i].item_quantity + '</span><button class="btn btn-dark">+</button></div>';
+                displayItems();
+            });
+            function displayItems() {
+                $('#display_item').empty();
+                for (var i = 0; i < item_array.length; i++) {
+                    var items = '<div class="d-flex justify-content-center border m-2">';
+                    items += '<div class="col-sm-6 mt-2 mb-2">';
+                    items += '<span id="item_name">' + item_array[i].item_name + ': </span>';
+                    items += '<span id="item_price">₱' + item_array[i].item_price + ' </span>';
+                    items += '</div>';
+                    items += '<div class="col-sm-6">';
+                    items += '<button class="btn btn-dark btn-minus" data-index="' + i + '">-</button><input type="text" class="w-25 mx-2 text-center text-truncate border-0 item-quantity" value="' + item_array[i].item_quantity + '" disabled><button class="btn btn-dark btn-plus" data-index="' + i + '">+</button>';
+                    items += '</div></div>';
                     $('#display_item').append(items);
                 }
+            }
+            $(document).on('click', '.btn-minus', function () {
+                var index = $(this).data('index');
+                item_array[index].item_quantity--;
+                if(item_array[index].item_quantity == 0){
+                    item_array.splice(index, 1);
+                }
+                displayItems();
+            });
+            $(document).on('click', '.btn-plus', function () {
+                var index = $(this).data('index');
+                item_array[index].item_quantity++;
+                displayItems();
             });
             function modaltable() {
                 $('#order_record').empty();

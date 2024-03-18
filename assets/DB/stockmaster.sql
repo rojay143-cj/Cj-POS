@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2024 at 07:16 AM
+-- Generation Time: Mar 18, 2024 at 08:56 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `item` (
   `item_id` int(11) NOT NULL,
   `item_name` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `unit_price` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `reorder_point` int(11) NOT NULL,
@@ -44,11 +45,11 @@ CREATE TABLE `item` (
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`item_id`, `item_name`, `unit_price`, `quantity`, `reorder_point`, `barcode`, `description`, `created_at`, `updated_at`, `supplier_id`) VALUES
-(33, 'pooler', 800, 290, 15, 776966280, 'test', '2024-03-12 12:31:45', '0000-00-00 00:00:00', 5),
-(34, 'Banker', 800, 200, 15, 477002539, 'test', '2024-03-12 12:31:54', '0000-00-00 00:00:00', 3),
-(35, 'Nail Cutter', 599, 290, 15, 544151657, 'test', '2024-03-12 12:32:05', '0000-00-00 00:00:00', 4),
-(36, 'Nail Cutter', 599, 290, 15, 538349321, 'test', '2024-03-12 12:32:15', '0000-00-00 00:00:00', 5);
+INSERT INTO `item` (`item_id`, `item_name`, `image`, `unit_price`, `quantity`, `reorder_point`, `barcode`, `description`, `created_at`, `updated_at`, `supplier_id`) VALUES
+(33, 'Lock', '../assets/image/lock.jpg', 150, 290, 15, 776966280, 'test', '2024-03-12 12:31:45', '0000-00-00 00:00:00', 5),
+(34, 'Nut', '../assets/image/nut.jpg', 55, 200, 15, 477002539, 'test', '2024-03-12 12:31:54', '0000-00-00 00:00:00', 3),
+(35, 'Hammer', '../assets/image/hammer.webp', 289, 290, 15, 544151657, 'test', '2024-03-12 12:32:05', '0000-00-00 00:00:00', 4),
+(36, 'Pliers', '../assets/image/pliers.webp', 599, 290, 15, 538349321, 'test', '2024-03-12 12:32:15', '0000-00-00 00:00:00', 5);
 
 -- --------------------------------------------------------
 
@@ -70,6 +71,14 @@ CREATE TABLE `orders` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `customer_name`, `customer_phone`, `payment_type`, `ref_num`, `amount_tendered`, `total_amount`, `change_amount`, `vat`, `discount`, `created_at`) VALUES
+(195, 'cj', '09208979564', 'Bank', 0, 4000, 3598, 0, 0, 0, '2024-03-15 09:05:42'),
+(196, 'cj', '80000', 'Bank', 0, 1000, 23729, 0, 0, 0, '2024-03-15 09:42:07');
+
 -- --------------------------------------------------------
 
 --
@@ -84,6 +93,18 @@ CREATE TABLE `order_details` (
   `item_subtotal` int(11) NOT NULL,
   `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`order_details_id`, `item_id`, `item_quantity`, `item_price`, `item_subtotal`, `order_id`) VALUES
+(564, 35, 2, 599, 1198, 195),
+(565, 34, 3, 800, 2400, 195),
+(566, 33, 6, 150, 900, 196),
+(567, 34, 8, 55, 440, 196),
+(568, 35, 7, 289, 2023, 196),
+(569, 36, 34, 599, 20366, 196);
 
 -- --------------------------------------------------------
 
@@ -156,13 +177,13 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=570;
 
 --
 -- AUTO_INCREMENT for table `supplier`
