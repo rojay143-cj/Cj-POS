@@ -1,6 +1,7 @@
 <?php 
     require '../connection/connection.php';
     echo '<script src="../api/datatables.js"></script>
+    <script src="../JS/MasterJS.js"></script>
     <link rel="stylesheet" href="../api/datatables.css">
     <script src="../api/bootstrap.js"></script>
     <link rel="stylesheet" href="../api/bootstrap.css">
