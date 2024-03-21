@@ -202,29 +202,7 @@
             </div>
         </div>
     <script>
-        $('#orderSummary').on('click',function(){
-            $('#summaryModal').modal('show');
-            $('#exampleModal').modal('hide');
-            let cusName = $('#cusName').val();
-            let tend_amount = $('#tend_amount').val();
-            let cusMob = $('#cusMob').val();
-            let payType = $('#payType').val();
-            let total = $('.total_amount').val();
-
-            $('#summary_name').val(cusName);
-            $('#summary_cash').val(tend_amount);
-            $('#summary_mob').val(cusMob);
-            $('#summary_pay').val(payType);
-            $('.summary_total_amount').val(total);
-            $('#summary_total_amount').html(total);
-
-            let orders = $('#order_record').html();
-            $('#order_summary').html(orders);
-            $('.btn-back').on('click',function(){
-                $('#exampleModal').modal('show');
-                $('#summaryModal').modal('hide');
-            });
-        });
+        
     </script>
 </body>
 </html>
