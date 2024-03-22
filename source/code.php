@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../api/bootstrap.css">
     <link rel="stylesheet" href="../CSS/style.css">
     ';
+    session_start();
 ?>
 
 

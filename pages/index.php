@@ -22,7 +22,8 @@
         <div class="side-nav">
             <h1 style="text-align:center;background-color: #39A7FF;color: #FFEED9;margin: 10px;padding: 20px 0">STOCKMASTER</h1>
             <div class="wrapper">
-                <div><a href="order.php">ORDER</a></div>
+                <div><a href="index.php">HOME</a></div>
+                <div><a href="orders.php">ORDERS</a></div>
                 <div><a href="item.php">ITEM</a></div>
                 <div><a href="supplier.php">SUPPLIER</a></div>
             </div>
@@ -201,8 +202,5 @@
                 </div>
             </div>
         </div>
-    <script>
-        
-    </script>
 </body>
 </html>
