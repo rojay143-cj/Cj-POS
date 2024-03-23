@@ -6,12 +6,21 @@ $(document).ready(function(){
             let cusMob = $('#cusMob').val();
             let payType = $('#payType :selected').val();
             let totalAmount = $('#total_amount').text()
+            let changeAmount = tend_amount - totalAmount;
+            let number = Math.floor(Math.random() * 99999999) + 1;
+            let ourDate = new Date().toISOString().split('T')[0];
+            let prefix = "MSTR-";
+            let refNumber = prefix + ourDate + number;
+            let order_status = "In Progress";
             item_list = {
                 'customer_name': cusName,
                 'tend_amount': tend_amount,
                 'total_amount':totalAmount,
+                'change_amount': changeAmount,
                 'customer_mobile': cusMob,
-                'pay_type': payType
+                'pay_type': payType,
+                'ref_number': refNumber,
+                'order_stat': order_status
             };
             item_array.push(item_list);
             if(($('#cusName').val() != null && $('#cusName').val() != '' ) && ($('#tend_amount').val() != null && $('#tend_amount').val() != '')){
@@ -138,4 +147,4 @@ $(document).ready(function(){
             $('#summaryModal').modal('hide');
         });
     });
-})
+});

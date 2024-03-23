@@ -1,7 +1,7 @@
 <?php 
     require '../connection/connection.php';
     echo '<script src="../api/datatables.js"></script>
-    <script src="../JS/StockJS.js"></script>
+    <script src="../JS/MasterJS.js"></script>
     <link rel="stylesheet" href="../api/datatables.css">
     <script src="../api/bootstrap.js"></script>
     <link rel="stylesheet" href="../api/bootstrap.css">
@@ -104,9 +104,12 @@ if (isset($_POST['item_array'])) {
         $pay_type = $item['pay_type'];
         $tend_amount = $item['tend_amount'];
         $total_amount = $item['total_amount'];
+        $change_amount = $item['change_amount'];
+        $refNum = $item['ref_number'];
+        $order_stat = $item['order_stat'];
 
-        $stmt_order = mysqli_prepare($conn, "INSERT INTO orders (customer_name, customer_phone, payment_type, amount_tendered, total_amount) VALUES (?, ?, ?, ?, ?)");
-        mysqli_stmt_bind_param($stmt_order, "sssss", $customer_name, $customer_mobile, $pay_type, $tend_amount, $total_amount);
+        $stmt_order = mysqli_prepare($conn, "INSERT INTO orders (customer_name, customer_phone, payment_type, amount_tendered, total_amount, change_amount, ref_num, order_stat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt_order, "ssssssss", $customer_name, $customer_mobile, $pay_type, $tend_amount, $total_amount, $change_amount, $refNum, $order_stat);
         mysqli_stmt_execute($stmt_order);
     }
 }

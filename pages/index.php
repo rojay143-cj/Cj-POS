@@ -26,6 +26,7 @@
                 <div><a href="orders.php">ORDERS</a></div>
                 <div><a href="item.php">ITEM</a></div>
                 <div><a href="supplier.php">SUPPLIER</a></div>
+                <div><a href="sales.php">SALES</a></div>
             </div>
         </div>
         <div class="main">
