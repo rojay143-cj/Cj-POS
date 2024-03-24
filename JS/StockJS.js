@@ -148,3 +148,40 @@ $(document).ready(function(){
         });
     });
 });
+
+// Sales Report CODE:
+
+$(document).ready(function(){
+    $.getJSON('../source/ajax.php', function(data) {
+        const xValues = data.xValues;
+        const yValues = data.yValues;
+        const barColors = ["green", "black", "pink", "blue", "brown", "red", "yellow"];
+
+        new Chart("sales-chart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "StockMaster Sales Report"
+                }
+            }
+        });
+    });
+    $('#startDate, #endDate').datepicker({
+        dateFormat: 'yy-mm-dd',
+        onSelect: function(selectedDate) {
+            const $this = $(this);
+            const otherDatepicker = $this.is('#startDate') ? $('#endDate') : $('#startDate');
+            otherDatepicker.datepicker("option", "minDate", selectedDate);
+            otherDatepicker.datepicker("option", "maxDate", selectedDate);
+        }
+    });
+});

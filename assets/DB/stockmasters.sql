@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2024 at 03:30 PM
+-- Generation Time: Mar 24, 2024 at 10:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -63,14 +63,26 @@ CREATE TABLE `orders` (
   `customer_name` varchar(55) NOT NULL,
   `customer_phone` varchar(25) NOT NULL,
   `payment_type` enum('Cash','Bank','GCash') NOT NULL,
-  `ref_num` int(11) NOT NULL,
+  `ref_num` varchar(55) NOT NULL,
   `amount_tendered` int(11) NOT NULL,
   `total_amount` int(11) NOT NULL,
   `change_amount` int(11) NOT NULL,
   `vat` int(11) NOT NULL,
   `discount` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `notes` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `order_stat` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `customer_name`, `customer_phone`, `payment_type`, `ref_num`, `amount_tendered`, `total_amount`, `change_amount`, `vat`, `discount`, `notes`, `created_at`, `order_stat`) VALUES
+(208, 'cj', '09208979564', 'Bank', 'MSTR-2024-03-243993760', 4000, 2186, 1814, 0, 0, '', '2024-03-18 15:27:23', 'Completed'),
+(209, 'cj', '09208979564', 'Bank', 'MSTR-2024-03-2435506246', 3000, 310, 2690, 0, 0, '', '2024-03-20 15:27:53', 'Completed'),
+(210, 'cj', '09208979564', 'GCash', 'MSTR-2024-03-2473809825', 2000, 1214, 786, 0, 0, '', '2024-03-23 16:46:02', 'Completed'),
+(211, 'ching', '09208979564', 'Bank', 'MSTR-2024-03-246876647', 2000, 644, 1356, 0, 0, '', '2024-03-24 17:36:03', 'In Progress');
 
 -- --------------------------------------------------------
 
@@ -86,6 +98,24 @@ CREATE TABLE `order_details` (
   `item_subtotal` int(11) NOT NULL,
   `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`order_details_id`, `item_id`, `item_quantity`, `item_price`, `item_subtotal`, `order_id`) VALUES
+(597, 33, 2, 150, 300, 208),
+(598, 34, 2, 55, 110, 208),
+(599, 35, 2, 289, 578, 208),
+(600, 36, 2, 599, 1198, 208),
+(601, 37, 2, 155, 310, 209),
+(602, 33, 3, 150, 450, 210),
+(603, 34, 3, 55, 165, 210),
+(604, 37, 2, 155, 310, 210),
+(605, 35, 1, 289, 289, 210),
+(606, 33, 2, 150, 300, 211),
+(607, 34, 1, 55, 55, 211),
+(608, 35, 1, 289, 289, 211);
 
 -- --------------------------------------------------------
 
@@ -159,13 +189,13 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=581;
+  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=609;
 
 --
 -- AUTO_INCREMENT for table `supplier`
