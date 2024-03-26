@@ -140,3 +140,4 @@ if (isset($_POST['item_array'])) {
 }
 ?>
 
+<!-- SALES REPORT CODE -->
